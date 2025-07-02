@@ -1,0 +1,35 @@
+create table public.workouts (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references auth.users(id) on delete cascade,
+  exercise_type text not null check (exercise_type in ('plank', 'squat')),
+  video_url text,
+  result_json jsonb not null,
+  created_at timestamptz not null default now()
+);
+
+-- Enable RLS
+alter table public.workouts enable row level security;
+
+-- Policy: Users can insert their own workouts
+create policy "Users can insert their own workouts"
+  on public.workouts
+  for insert
+  with check (auth.uid() = user_id);
+
+-- Policy: Users can select their own workouts
+create policy "Users can select their own workouts"
+  on public.workouts
+  for select
+  using (auth.uid() = user_id);
+
+-- Policy: Users can update their own workouts
+create policy "Users can update their own workouts"
+  on public.workouts
+  for update
+  using (auth.uid() = user_id);
+
+-- Policy: Users can delete their own workouts
+create policy "Users can delete their own workouts"
+  on public.workouts
+  for delete
+  using (auth.uid() = user_id);
