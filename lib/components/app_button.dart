@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../theme.dart';
 
 enum AppButtonType { primary, secondary }
 
@@ -19,35 +18,45 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = type == AppButtonType.primary
-        ? AppColors.accent
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final isPrimary = type == AppButtonType.primary;
+    final backgroundColor = isPrimary
+        ? colorScheme.secondary
         : Colors.transparent;
-    final textColor = type == AppButtonType.primary
-        ? AppColors.primary
-        : AppColors.accent;
-    final border = type == AppButtonType.secondary
-        ? BorderSide(color: AppColors.accent, width: 2)
+    final foregroundColor = isPrimary
+        ? colorScheme.onSecondary
+        : colorScheme.secondary;
+    final border = !isPrimary
+        ? BorderSide(color: colorScheme.secondary, width: 2)
         : BorderSide.none;
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          foregroundColor: textColor,
+          backgroundColor: backgroundColor,
+          foregroundColor: foregroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
             side: border,
           ),
           elevation: 0,
+          textStyle: theme.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 16),
         ),
         onPressed: loading ? null : onPressed,
         child: loading
-            ? const SizedBox(
+            ? SizedBox(
                 width: 20,
                 height: 20,
-                child: CircularProgressIndicator(strokeWidth: 2),
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(foregroundColor),
+                ),
               )
-            : Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
+            : Text(label),
       ),
     );
   }

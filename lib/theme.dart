@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const background = Colors.white;
-  static const primary = Colors.black;
-  static const accent = Color(0xFF5B5FE9); // purplish blue for CTAs and accents
-  static const secondary = Color(0xFFF7F7F7);
-  static const success = Color(0xFF4ADE80); // green
-  static const warning = Color(0xFFFFD600); // yellow
-  static const error = Color(0xFFF87171);
-  static const disabled = Color(0xFFBDBDBD);
+  static Color background = Colors.white;
+  static Color primary = Colors.black;
+  static Color accent = const Color(
+    0xFF5B5FE9,
+  ); // purplish blue for CTAs and accents
+  static Color secondary = const Color(0xFFF7F7F7);
+  static Color success = const Color(0xFF4ADE80); // green
+  static Color warning = const Color(0xFFFFD600); // yellow
+  static Color error = const Color(0xFFF87171);
+  static Color disabled = const Color(0xFFBDBDBD);
 }
 
 final ThemeData workoutWiseTheme = ThemeData(
@@ -25,7 +27,7 @@ final ThemeData workoutWiseTheme = ThemeData(
     onSurface: AppColors.primary,
     onError: Colors.white,
   ),
-  appBarTheme: const AppBarTheme(
+  appBarTheme: AppBarTheme(
     backgroundColor: Colors.transparent,
     elevation: 0,
     centerTitle: true,
@@ -52,7 +54,7 @@ final ThemeData workoutWiseTheme = ThemeData(
       borderRadius: BorderRadius.circular(16),
       borderSide: BorderSide.none,
     ),
-    labelStyle: const TextStyle(
+    labelStyle: TextStyle(
       color: AppColors.primary,
       fontWeight: FontWeight.w500,
     ),
@@ -63,7 +65,7 @@ final ThemeData workoutWiseTheme = ThemeData(
     elevation: 2,
     margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
   ),
-  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: Colors.white,
     selectedItemColor: AppColors.accent,
     unselectedItemColor: AppColors.disabled,
@@ -72,7 +74,7 @@ final ThemeData workoutWiseTheme = ThemeData(
     type: BottomNavigationBarType.fixed,
     elevation: 8,
   ),
-  textTheme: const TextTheme(
+  textTheme: TextTheme(
     headlineLarge: TextStyle(
       fontFamily: 'HeadingFont',
       fontSize: 32,

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'login_screen.dart';
@@ -6,9 +7,18 @@ import 'theme.dart';
 import 'splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:logging/logging.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // Set up logging
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((record) {
+    // ignore: avoid_print
+    print('[${record.level.name}] ${record.time}: ${record.message}');
+  });
+  final log = Logger('main');
+
+  log.info('Env file exists: ${File('.env').existsSync()}');
   await dotenv.load();
 
   await Supabase.initialize(

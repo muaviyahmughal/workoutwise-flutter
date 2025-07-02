@@ -47,45 +47,66 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-        child: Stack(
+        child: Column(
           children: [
+            // Top: Heading and body text
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 32.0,
+                left: 32.0,
+                right: 32.0,
+                bottom: 16.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Welcome to WorkoutWise',
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      color: AppColors.primary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Get real-time feedback on your form, count reps, and track your progress. Start your fitness journey now!',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Color.fromARGB(
+                        (0.7 * 255).round(),
+                        (AppColors.primary.r * 255.0).round() & 0xff,
+                        (AppColors.primary.g * 255.0).round() & 0xff,
+                        (AppColors.primary.b * 255.0).round() & 0xff,
+                      ),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            // Middle: Video (smaller)
             if (_videoReady)
-              Positioned.fill(
-                child: FittedBox(
-                  fit: BoxFit.cover,
-                  child: SizedBox(
-                    width: _controller.value.size.width,
-                    height: _controller.value.size.height,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                child: AspectRatio(
+                  aspectRatio: _controller.value.aspectRatio,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(24),
                     child: VideoPlayer(_controller),
                   ),
                 ),
               ),
-            Container(color: const Color.fromRGBO(0, 0, 0, 0.3)),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Welcome to WorkoutWise',
-                      style: Theme.of(
-                        context,
-                      ).textTheme.headlineLarge?.copyWith(color: Colors.white),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'AI-powered real-time feedback, rep counting, and progress tracking for your home workouts.',
-                      style: Theme.of(
-                        context,
-                      ).textTheme.titleMedium?.copyWith(color: Colors.white70),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 40),
-                    AppButton(label: 'Get Started', onPressed: _onGetStarted),
-                  ],
-                ),
+            const Spacer(),
+            // Bottom: Button
+            Padding(
+              padding: const EdgeInsets.only(
+                bottom: 32.0,
+                left: 32.0,
+                right: 32.0,
+              ),
+              child: AppButton(
+                label: 'Get Started',
+                onPressed: _onGetStarted,
+                loading: false,
               ),
             ),
           ],

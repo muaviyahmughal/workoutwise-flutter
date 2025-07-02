@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'theme.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -50,8 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('WorkoutWise Home')),
+      appBar: AppBar(
+        title: Text('WorkoutWise Home', style: theme.textTheme.titleMedium),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -59,15 +63,18 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Icon(
                 _apiHealthy ? Icons.check_circle : Icons.error,
-                color: _apiHealthy ? Colors.green : Colors.red,
+                color: _apiHealthy ? AppColors.success : AppColors.error,
               ),
               const SizedBox(width: 8),
               Text(
                 _healthMessage ??
                     (_checkingHealth ? 'Checking API health...' : 'Unknown'),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: AppColors.primary,
+                ),
               ),
               IconButton(
-                icon: const Icon(Icons.refresh),
+                icon: Icon(Icons.refresh, color: AppColors.primary),
                 onPressed: _checkingHealth ? null : _checkApiHealth,
                 tooltip: 'Refresh',
               ),
@@ -75,41 +82,116 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: 24),
           ListTile(
-            leading: const Icon(Icons.fitness_center),
-            title: const Text('Start New Workout'),
-            subtitle: const Text('Choose plank or squat'),
+            leading: Icon(Icons.fitness_center, color: AppColors.primary),
+            title: Text(
+              'Start New Workout',
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: AppColors.primary,
+              ),
+            ),
+            subtitle: Text(
+              'Choose plank or squat',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: Color.fromARGB(
+                  (0.6 * 255).round(),
+                  (AppColors.primary.r * 255.0).round() & 0xff,
+                  (AppColors.primary.g * 255.0).round() & 0xff,
+                  (AppColors.primary.b * 255.0).round() & 0xff,
+                ),
+              ),
+            ),
             onTap: () {
               // TODO: Navigate to workout type selection
             },
           ),
           ListTile(
-            leading: const Icon(Icons.videocam),
-            title: const Text('Upload/Record Video'),
-            subtitle: const Text('Analyze a workout video'),
+            leading: Icon(Icons.videocam, color: AppColors.primary),
+            title: Text(
+              'Upload/Record Video',
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: AppColors.primary,
+              ),
+            ),
+            subtitle: Text(
+              'Analyze a workout video',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: Color.fromARGB(
+                  (0.6 * 255).round(),
+                  (AppColors.primary.r * 255.0).round() & 0xff,
+                  (AppColors.primary.g * 255.0).round() & 0xff,
+                  (AppColors.primary.b * 255.0).round() & 0xff,
+                ),
+              ),
+            ),
             onTap: () {
               // TODO: Navigate to video upload/record
             },
           ),
           ListTile(
-            leading: const Icon(Icons.feedback),
-            title: const Text('View Feedback/Results'),
-            subtitle: const Text('See your latest workout feedback'),
+            leading: Icon(Icons.feedback, color: AppColors.primary),
+            title: Text(
+              'View Feedback/Results',
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: AppColors.primary,
+              ),
+            ),
+            subtitle: Text(
+              'See your latest workout feedback',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: Color.fromARGB(
+                  (0.6 * 255).round(),
+                  (AppColors.primary.r * 255.0).round() & 0xff,
+                  (AppColors.primary.g * 255.0).round() & 0xff,
+                  (AppColors.primary.b * 255.0).round() & 0xff,
+                ),
+              ),
+            ),
             onTap: () {
               // TODO: Navigate to feedback/results
             },
           ),
           ListTile(
-            leading: const Icon(Icons.history),
-            title: const Text('Workout History'),
-            subtitle: const Text('View your workout history'),
+            leading: Icon(Icons.history, color: AppColors.primary),
+            title: Text(
+              'Workout History',
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: AppColors.primary,
+              ),
+            ),
+            subtitle: Text(
+              'View your workout history',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: Color.fromARGB(
+                  (0.6 * 255).round(),
+                  (AppColors.primary.r * 255.0).round() & 0xff,
+                  (AppColors.primary.g * 255.0).round() & 0xff,
+                  (AppColors.primary.b * 255.0).round() & 0xff,
+                ),
+              ),
+            ),
             onTap: () {
               // TODO: Navigate to workout history
             },
           ),
           ListTile(
-            leading: const Icon(Icons.person),
-            title: const Text('Profile/Settings'),
-            subtitle: const Text('View and edit your profile'),
+            leading: Icon(Icons.person, color: AppColors.primary),
+            title: Text(
+              'Profile/Settings',
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: AppColors.primary,
+              ),
+            ),
+            subtitle: Text(
+              'View and edit your profile',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: Color.fromARGB(
+                  (0.6 * 255).round(),
+                  (AppColors.primary.r * 255.0).round() & 0xff,
+                  (AppColors.primary.g * 255.0).round() & 0xff,
+                  (AppColors.primary.b * 255.0).round() & 0xff,
+                ),
+              ),
+            ),
             onTap: () {
               // TODO: Navigate to profile/settings
             },

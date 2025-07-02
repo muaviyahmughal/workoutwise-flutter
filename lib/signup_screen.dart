@@ -4,6 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'components/app_app_bar.dart';
 import 'components/app_button.dart';
 import 'components/app_text_field.dart';
+import 'theme.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -57,6 +58,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     return Scaffold(
       appBar: const AppAppBar(title: 'Sign Up'),
       body: Center(
@@ -68,15 +71,22 @@ class _SignupScreenState extends State<SignupScreen> {
               children: [
                 Text(
                   'Create Account',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    color: AppColors.primary,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
                 Text(
                   'Sign up to start your fitness journey',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleMedium?.copyWith(color: Colors.black54),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: Color.fromARGB(
+                      (0.6 * 255).round(),
+                      (AppColors.primary.r * 255.0).round() & 0xff,
+                      (AppColors.primary.g * 255.0).round() & 0xff,
+                      (AppColors.primary.b * 255.0).round() & 0xff,
+                    ),
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 32),
@@ -93,7 +103,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 const SizedBox(height: 16),
                 if (_error != null) ...[
-                  Text(_error!, style: const TextStyle(color: Colors.red)),
+                  Text(
+                    _error!,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.error,
+                    ),
+                  ),
                   const SizedBox(height: 8),
                 ],
                 AppButton(
@@ -112,9 +127,14 @@ class _SignupScreenState extends State<SignupScreen> {
                 const SizedBox(height: 32),
                 Text(
                   'By signing up, you agree to our Terms of Service and Privacy Policy.',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(color: Colors.black38),
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: Color.fromARGB(
+                      (0.4 * 255).round(),
+                      (AppColors.primary.r * 255.0).round() & 0xff,
+                      (AppColors.primary.g * 255.0).round() & 0xff,
+                      (AppColors.primary.b * 255.0).round() & 0xff,
+                    ),
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],

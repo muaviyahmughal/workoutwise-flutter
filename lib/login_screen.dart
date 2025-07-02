@@ -4,6 +4,7 @@ import 'package:video_player/video_player.dart';
 import 'components/app_app_bar.dart';
 import 'components/app_text_field.dart';
 import 'components/app_button.dart';
+import 'theme.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -118,6 +119,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     return Scaffold(
       appBar: const AppAppBar(title: 'Login'),
       body: Center(
@@ -141,15 +144,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 24),
                 Text(
                   'Welcome Back!',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    color: AppColors.primary,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
                 Text(
                   'Sign in to continue your fitness journey',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleMedium?.copyWith(color: Colors.black54),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: Color.fromARGB(
+                      (0.6 * 255).round(),
+                      (AppColors.primary.r * 255.0).round() & 0xff,
+                      (AppColors.primary.g * 255.0).round() & 0xff,
+                      (AppColors.primary.b * 255.0).round() & 0xff,
+                    ),
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 32),
@@ -174,17 +184,27 @@ class _LoginScreenState extends State<LoginScreen> {
                         });
                       },
                     ),
-                    const Text('Remember me'),
+                    Text('Remember me', style: theme.textTheme.bodyMedium),
                     const Spacer(),
                     TextButton(
                       onPressed: _forgotPassword,
-                      child: const Text('Forgot password?'),
+                      child: Text(
+                        'Forgot password?',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: colorScheme.secondary,
+                        ),
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 16),
                 if (_error != null) ...[
-                  Text(_error!, style: const TextStyle(color: Colors.red)),
+                  Text(
+                    _error!,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.error,
+                    ),
+                  ),
                   const SizedBox(height: 8),
                 ],
                 AppButton(
@@ -203,9 +223,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 32),
                 Text(
                   'By continuing, you agree to our Terms of Service and Privacy Policy.',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(color: Colors.black38),
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: Color.fromARGB(
+                      (0.4 * 255).round(),
+                      (AppColors.primary.r * 255.0).round() & 0xff,
+                      (AppColors.primary.g * 255.0).round() & 0xff,
+                      (AppColors.primary.b * 255.0).round() & 0xff,
+                    ),
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],
