@@ -5,12 +5,15 @@ import 'signup_screen.dart';
 import 'theme.dart';
 import 'splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
+
   await Supabase.initialize(
-    url: 'https://mvxbawyikpqbfrrkmhlk.supabase.co',
-    anonKey: 'sb_publishable_qYOJsXA4WMkQRCl9odwAsQ_jF9UttJc',
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
   runApp(const MyApp());
 }
