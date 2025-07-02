@@ -21,10 +21,8 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isPrimary = type == AppButtonType.primary;
-    final backgroundColor =
-        isPrimary ? AppColors.accent : Colors.transparent;
-    final foregroundColor =
-        isPrimary ? AppColors.secondary : AppColors.accent;
+    final backgroundColor = isPrimary ? AppColors.accent : Colors.transparent;
+    final foregroundColor = isPrimary ? AppColors.secondary : AppColors.accent;
     final border = !isPrimary
         ? BorderSide(color: AppColors.accent, width: 2)
         : BorderSide.none;
