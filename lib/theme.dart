@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   static Color background = Colors.white;
   static Color primary = Colors.black;
-  static Color accent = const Color(
-    0xFF5B5FE9,
-  ); // purplish blue for CTAs and accents
+  static Color accent = const Color(0xFF0C0CD4); // updated accent color
   static Color secondary = const Color(0xFFF7F7F7);
   static Color success = const Color(0xFF4ADE80); // green
   static Color warning = const Color(0xFFFFD600); // yellow

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme.dart';
 
 enum AppButtonType { primary, secondary }
 
@@ -19,16 +20,13 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final isPrimary = type == AppButtonType.primary;
-    final backgroundColor = isPrimary
-        ? colorScheme.secondary
-        : Colors.transparent;
-    final foregroundColor = isPrimary
-        ? colorScheme.onSecondary
-        : colorScheme.secondary;
+    final backgroundColor =
+        isPrimary ? AppColors.accent : Colors.transparent;
+    final foregroundColor =
+        isPrimary ? AppColors.secondary : AppColors.accent;
     final border = !isPrimary
-        ? BorderSide(color: colorScheme.secondary, width: 2)
+        ? BorderSide(color: AppColors.accent, width: 2)
         : BorderSide.none;
     return SizedBox(
       width: double.infinity,
